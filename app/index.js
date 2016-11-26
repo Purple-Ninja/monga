@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Dimensions, Image, ListView, StyleSheet, TabBarIOS, Text, View } from 'react-native';
 import CarouselApp from './component/carousel';
-import OfflineApp from './component/offline';
+import ArchiveApp from './component/archive';
 import SettingApp from './component/setting';
 import FeaturesApp from './component/features';
 
@@ -58,7 +58,7 @@ class appContainer extends React.Component {
                                 selectedTab: 'offlineTab',
                               });
                             }}>
-            <OfflineApp />
+            <ArchiveApp />
           </Icon.TabBarItem>
           <Icon.TabBarItem  title="Blog"
                             iconName="ios-at-outline"

@@ -24,9 +24,7 @@ class SettingApp extends Component {
   render() {
     return (
       <View style={{backgroundColor:'#EFEFF4',flex:1}}>
-        <View style={{borderBottomWidth:1, backgroundColor:'#f7f7f8',borderColor:'#c8c7cc'}}>
-          <Text style={{alignSelf:'center',marginTop:30,marginBottom:10,fontWeight:'bold',fontSize:16}}>Settings</Text>
-        </View>
+        <View style={styles.statusBar}><Text style={styles.statusBarText}>Setting</Text></View>
         <View style={{backgroundColor:'#EFEFF4',flex:1}}>
           <SettingsList borderColor='#c8c7cc' defaultItemSize={50}>
             <SettingsList.Header headerStyle={{marginTop:15}}/>
@@ -36,18 +34,12 @@ class SettingApp extends Component {
                                 hasNavArrow={false}
                                 title='Airplane Mode' />
             <SettingsList.Header headerStyle={{marginTop:15}}/>
-            <SettingsList.Item
-              title='Notifications'
-              onPress={() => Alert.alert('Route To Notifications Page')}
-            />
-            <SettingsList.Item
-              title='Control Center'
-              onPress={() => Alert.alert('Route To Control Center Page')}
-            />
-            <SettingsList.Item
-              title='Do Not Disturb'
-              onPress={() => Alert.alert('Route To Do Not Disturb Page')}
-            />
+            <SettingsList.Item  title='Notifications'
+                                onPress={() => Alert.alert('Route To Notifications Page')} />
+            <SettingsList.Item  title='Control Center'
+                                onPress={() => Alert.alert('Route To Control Center Page')} />
+            <SettingsList.Item  title='Do Not Disturb'
+                                onPress={() => Alert.alert('Route To Do Not Disturb Page')} />
           </SettingsList>
         </View>
     </View>

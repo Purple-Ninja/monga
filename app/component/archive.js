@@ -5,7 +5,7 @@ const styles = require('./../css/stylesheet');
 
 import ArticleItem from './articleItem';
 
-class OfflineApp extends Component {
+class ArchiveApp extends Component {
   constructor(props) {
       super(props);
       const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -17,9 +17,7 @@ class OfflineApp extends Component {
   render() {
     return (
           <View style={{flex: 1 }}>
-            <View style={{borderBottomWidth:1, backgroundColor:'#f7f7f8',borderColor:'#c8c7cc'}}>
-              <Text style={{alignSelf:'center',marginTop:30,marginBottom:10,fontWeight:'bold',fontSize:16}}>Settings</Text>
-            </View>
+            <View style={styles.statusBar}><Text style={styles.statusBarText}>Offline</Text></View>
             <ListView dataSource={this.state.dataSource}
                       renderRow={(data) => <ArticleItem />} />
           </View>
@@ -27,4 +25,4 @@ class OfflineApp extends Component {
   }
 }
 
-export default OfflineApp;
+export default ArchiveApp;

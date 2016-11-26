@@ -14,6 +14,18 @@ const styles = StyleSheet.create({
       flex: 1,
       flexDirection: 'row'
     },
+    statusBar: {
+      borderBottomWidth: 1,
+      backgroundColor: '#f7f7f8',
+      borderColor: '#c8c7cc'
+    },
+    statusBarText: {
+      alignSelf:'center',
+      marginTop: 30,
+      marginBottom: 10,
+      fontWeight: 'bold',
+      fontSize: 16
+    },
     // article section
     articleListContainer: {
       flex: 1,
