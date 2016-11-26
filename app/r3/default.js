@@ -12,7 +12,7 @@ I18n.translations = {
 I18n.fallbacks = true
 
 I18n.defaultLocale = "zh-TW";
-//I18n.locale = "zh-TW";
+I18n.locale = "zh-TW";
 //I18n.currentLocale();
 
 export default I18n;

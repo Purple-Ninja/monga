@@ -1,87 +1,111 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 
-const AVATAR_SIZE = 120;
-const ROW_HEIGHT = 60;
-const PARALLAX_HEADER_HEIGHT = 350;
-const STICKY_HEADER_HEIGHT = 70;
+const PARALLAX = {
+      HEADER_HEIGHT: 350,
+      STICKY_HEADER: {
+          HEIGHT: 70
+      }
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'black'
-  },
-  background: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: window.width,
-    height: PARALLAX_HEADER_HEIGHT
-  },
-  stickySection: {
-    height: STICKY_HEADER_HEIGHT,
-    width: 300,
-    justifyContent: 'flex-end'
-  },
-  stickySectionText: {
-    color: 'white',
-    fontSize: 20,
-    margin: 10
-  },
-  fixedSection: {
-    position: 'absolute',
-    bottom: 10,
-    right: 10
-  },
-  fixedSectionText: {
-    color: '#999',
-    fontSize: 20
-  },
-  parallaxHeader: {
-    alignItems: 'center',
-    flex: 1,
-    flexDirection: 'column',
-    paddingTop: 100
-  },
-  avatar: {
-    marginBottom: 10,
-    borderRadius: AVATAR_SIZE / 2
-  },
-  sectionSpeakerText: {
-    color: 'white',
-    fontSize: 24,
-    paddingVertical: 5
-  },
-  sectionTitleText: {
-    color: 'white',
-    fontSize: 18,
-    paddingVertical: 5
-  },
-  row: {
-    overflow: 'hidden',
-    paddingHorizontal: 10,
-    height: ROW_HEIGHT,
-    backgroundColor: 'white',
-    borderColor: '#ccc',
-    borderBottomWidth: 1,
-    borderTopWidth: 1,
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
-    marginTop: 10,
-    justifyContent: 'center'
-  },
-  rowText: {
-    fontSize: 14
-  },
-  //
-  tabContent: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  tabText: {
-    color: 'white',
-    margin: 50,
-  }
+    // overall
+    container: {
+      flex: 1,
+      flexDirection: 'row'
+    },
+    // article section
+    articleListContainer: {
+      flex: 1,
+      flexDirection: 'row',
+      marginTop: 6
+    },
+    articleFooterContainer: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginTop: 6
+    },
+    articleListRow: {
+        overflow: 'hidden',
+        paddingHorizontal: 10,
+        paddingTop: 10,
+        paddingBottom: 10,
+        minHeight: 60,
+        backgroundColor: '#FFFFFF',
+        borderColor: '#CCCCCC',
+        borderWidth: 1,
+        marginTop: 10,
+        justifyContent: 'center'
+    },
+    articleListMetaTag: {
+        color: "#777777",
+        fontSize: 12
+    },
+    articleListTitle: {
+      fontSize: 16,
+      fontWeight: 'bold'
+    },
+    articleListDesc: {
+      fontSize: 14
+    },
+    articleListImage: {
+        height: 60,
+        borderRadius: 30,
+        width: 60,
+        marginTop: 6,
+        marginBottom: 6,
+        marginRight: 10
+    },
+    articleListHeroTitle: {
+        color: '#FFFFFF',
+        fontSize: 18,
+        paddingVertical: 5,
+        shadowColor: "#000000",
+        shadowOpacity: 0.8,
+        shadowRadius: 10
+    },
+    articleListHeroSubtitle: {
+      color: '#FFFFFF',
+      fontSize: 11,
+      paddingVertical: 5,
+      shadowColor: "#000000",
+      shadowOpacity: 0.8,
+      shadowRadius: 10
+    },
+    parallaxScrollView: {
+      position: 'absolute',
+      top: 0,
+      width: window.width,
+      backgroundColor: 'rgba(0,0,0,.4)',
+      height: PARALLAX.HEADER_HEIGHT
+    },
+    //
+    stickySection: {
+      height: PARALLAX.STICKY_HEADER.HEIGHT,
+      width: 300,
+      justifyContent: 'flex-end'
+    },
+    stickySectionText: {
+      color: 'white',
+      fontSize: 14,
+      margin: 10
+    },
+    fixedSection: {
+      position: 'absolute',
+      bottom: 10,
+      right: 10
+    },
+    fixedSectionText: {
+      color: '#999',
+      fontSize: 14
+    },
+    parallaxHeader: {
+      alignItems: 'center',
+      flex: 1,
+      flexDirection: 'column',
+      paddingTop: 100
+    }
 });
 
 module.exports = styles;
