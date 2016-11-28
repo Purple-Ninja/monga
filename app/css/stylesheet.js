@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
       flex: 1,
       flexDirection: 'row',
       justifyContent: 'space-between',
-      marginTop: 6
+      marginTop: 12
     },
     articleListRow: {
         overflow: 'hidden',
@@ -68,6 +68,10 @@ const styles = StyleSheet.create({
         marginTop: 6,
         marginBottom: 6,
         marginRight: 10
+    },
+    articleListIcon: {
+        width: 16,
+        height: 16
     },
     articleListHeroTitle: {
         color: '#FFFFFF',

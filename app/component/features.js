@@ -4,6 +4,8 @@ import { Dimensions, StyleSheet, View, Text, ListView, Image } from 'react-nativ
 const styles = require('./../css/stylesheet');
 
 import ArticleItem from './articleItem';
+import SearchBar from 'react-native-search-bar';
+
 
 class FeaturesApp extends Component {
   constructor(props) {
@@ -16,10 +18,13 @@ class FeaturesApp extends Component {
 
   render() {
     return (
-          <ListView
-            dataSource={this.state.dataSource}
-            renderRow={(data) => <ArticleItem />}
-          />
+      <View style={{flex: 1 }}>
+          <View style={styles.statusBar}><Text style={styles.statusBarText}>Features</Text></View>
+           <SearchBar   placeholder='Search'
+                        textFieldBackgroundColor='#FFF' />
+            <ListView   dataSource={this.state.dataSource}
+                        renderRow={(data) => <ArticleItem />} />
+      </View>
     );
   }
 }

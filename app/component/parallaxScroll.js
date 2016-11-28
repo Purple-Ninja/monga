@@ -63,6 +63,7 @@ class ParallaxScroll extends Component {
                                   description={data._description}
                                   image={data._image}
                                   url={data.url}
+                                  icon={data.favicon}
                     />
                 )}
 

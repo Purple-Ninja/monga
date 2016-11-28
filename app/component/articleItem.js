@@ -5,11 +5,13 @@ import Browser from 'react-native-browser';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import I18n from './../r3/default';
 const styles = require('./../css/stylesheet');
+import _ from 'lodash';
 
 const DUMMY = {
   title: '出師表',
   desc: '臣亮言：先帝創業未半，而中道崩殂。今天下三分，益州疲弊，此誠危急存亡之秋也。然侍衛之臣，不懈於內；忠志之士，忘身於外者，蓋追先帝之殊遇，欲報之於陛下也。誠宜開張聖聽，以光先帝遺德，恢弘志士之氣',
-  img: 'https://facebook.github.io/react/img/logo_og.png'
+  img: 'https://facebook.github.io/react/img/logo_og.png',
+  icon: ''
 }
 
 class ArticleItem extends Component {
@@ -17,13 +19,15 @@ class ArticleItem extends Component {
       title: DUMMY.title,
       description: DUMMY.desc,
       image: DUMMY.img,
-      url: 'https://google.com/'
+      url: 'https://google.com/',
+      icon: 'https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-128.png'
   };
   static propTypes = {
       title: React.PropTypes.string.isRequired,
       description: React.PropTypes.string.isRequired,
       image: React.PropTypes.string,
-      url: React.PropTypes.string.isRequired
+      url: React.PropTypes.string.isRequired,
+      icon: React.PropTypes.string
   };
 
   _onPressButton = (e) => {
@@ -50,7 +54,10 @@ class ArticleItem extends Component {
                           accessibilityTraits="link">
         <View key={this.props.title} style={ styles.articleListRow }>
           <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text>YAHOO</Text>
+              <View style={{flex: 1, flexDirection: 'row'}}>
+                <Image style={styles.articleListIcon} source={{uri: this.props.icon }}/>
+                <Text>YAHOO</Text>
+              </View>
               <Text><Icon name="bookmark" size={14} color="#900" />{I18n.t('like')}</Text>
           </View>
           <View style={styles.articleListContainer}>
@@ -73,12 +80,6 @@ class ArticleItem extends Component {
                                   accessibilityLabel="touchable article share"
                                   accessibilityTraits="button">
                   <Text><Icon name="share-alt" size={14} color="#900" />{I18n.t('share')}</Text>
-              </TouchableHighlight>
-              <TouchableHighlight onPress={this._onPressShareAbstract}
-                                  accessible={true}
-                                  accessibilityLabel="touchable article abstract"
-                                  accessibilityTraits="button">
-                  <Text><Icon name="flag" size={14} color="#900" />{I18n.t('abstract')}</Text>
               </TouchableHighlight>
               <TouchableHighlight onPress={this._onPressShareTag}
                                   accessible={true}
