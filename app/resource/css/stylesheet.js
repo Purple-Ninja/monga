@@ -9,6 +9,14 @@ const PARALLAX = {
 };
 
 const styles = StyleSheet.create({
+    placeholderTitle: {
+      backgroundColor: '#DCDCDC',
+      marginTop: 4
+    },
+    placeholderText: {
+      backgroundColor: '#888888',
+      marginTop: 4
+    },
     // overall
     defaultFlex: {
       flex: 1

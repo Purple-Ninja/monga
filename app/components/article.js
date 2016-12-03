@@ -20,6 +20,28 @@ const browserConf = {
       };
 
 class Article extends Component {
+
+  static defaultProps = {
+      title: dummyBase.title,
+      description: dummyBase.desc,
+      image: dummyBase.img,
+      url: dummyBase.url,
+      favicon: dummyBase.icon,
+      bookmarkID: 1111,
+      host: 'default.com',
+      placeholder: false
+  }
+
+  static propTypes = {
+      title: React.PropTypes.string.isRequired,
+      description: React.PropTypes.string.isRequired,
+      image: React.PropTypes.string,
+      url: React.PropTypes.string.isRequired,
+      favicon: React.PropTypes.string,
+      bookmarkID: React.PropTypes.number,
+      host: React.PropTypes.string.isRequired
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -27,23 +49,6 @@ class Article extends Component {
       archivedColor: iconBase.archive.unSelectedColor
     };
   }
-
-  static defaultProps = {
-      title: dummyBase.title,
-      description: dummyBase.desc,
-      image: dummyBase.img,
-      url: dummyBase.url,
-      icon: dummyBase.icon,
-      bookmarkID: 1111
-  };
-  static propTypes = {
-      title: React.PropTypes.string.isRequired,
-      description: React.PropTypes.string.isRequired,
-      image: React.PropTypes.string,
-      url: React.PropTypes.string.isRequired,
-      icon: React.PropTypes.string,
-      bookmarkID: React.PropTypes.number
-  };
 
   _onPressButton = (e) => {
     Browser.open(readBaseAPI + this.props.bookmarkID, browserConf);
@@ -58,6 +63,11 @@ class Article extends Component {
   }
 
   _onPressShareSocial = (e) => {
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log("componentWillReceiveProps");
+    console.log("nextProps", nextProps);
   }
 
   _likeOnclick = (e) => {
@@ -75,58 +85,69 @@ class Article extends Component {
   }
 
   render() {
-    return (
-      <TouchableHighlight onPress={this._onPressButton}
-                          accessible={true}
-                          accessibilityLabel="touchable article item"
-                          accessibilityTraits="link">
-        <View key={this.props.title} style={ styles.articleListRow }>
-          <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
-              <View style={{flex: 1, flexDirection: 'row'}}>
-                <Image style={styles.articleListIcon} source={{uri: this.props.icon }}/>
-                <Text>YAHOO</Text>
-              </View>
-              <TouchableHighlight onPress={this._likeOnclick}>
-                <Text><FaIcon name="bookmark" size={iconBase.archive.size} color={this.state.archivedColor} />{I18n.t('like')}</Text>
-              </TouchableHighlight>
+    if (this.props.placeholder) {
+      return (
+          <View style={ styles.articleListRow }>
+            <View style={styles.placeholderTitle}><Text></Text></View>
+            <View style={styles.placeholderTitle}><Text></Text></View>
+            <View style={styles.placeholderText}><Text></Text></View>
+            <View style={styles.placeholderText}><Text></Text></View>
           </View>
-          <View style={styles.articleListContainer}>
-              <Text style={styles.articleListMetaTag}>X 小時前 | </Text>
-              <Text style={styles.articleListMetaTag}>約 X 分鐘讀完 | </Text>
-              <Text style={styles.articleListMetaTag}>{I18n.t('popular')} 1230</Text>
+      );
+    } else {
+      return (
+        <TouchableHighlight onPress={this._onPressButton}
+                            accessible={true}
+                            accessibilityLabel="touchable article item"
+                            accessibilityTraits="link">
+          <View style={ styles.articleListRow }>
+            <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
+                <View style={{flex: 1, flexDirection: 'row'}}>
+                  <Image style={styles.articleListIcon} source={{uri: this.props.favicon }}/>
+                  <Text>{this.props.host}</Text>
+                </View>
+                <TouchableHighlight onPress={this._likeOnclick}>
+                  <Text><FaIcon name="bookmark" size={iconBase.archive.size} color={this.state.archivedColor} />{I18n.t('like')}</Text>
+                </TouchableHighlight>
+            </View>
+            <View style={styles.articleListContainer}>
+                <Text style={styles.articleListMetaTag}>X 小時前 | </Text>
+                <Text style={styles.articleListMetaTag}>約 X 分鐘讀完 | </Text>
+                <Text style={styles.articleListMetaTag}>{I18n.t('popular')} 1230</Text>
+            </View>
+            <View style={styles.articleListContainer}>
+                <Text style={styles.articleListTitle}>{this.props.title}</Text>
+            </View>
+            <View style={styles.articleListContainer}>
+                {this.props.image && this.props.image!=null &&
+                  <Image style={styles.articleListImage} source={{uri: this.props.image }}/>
+                }
+                <Text style={ styles.articleListDesc }>{this.props.description}</Text>
+            </View>
+            <View style={styles.articleFooterContainer}>
+                <TouchableHighlight onPress={this._onPressShareSocial}
+                                    accessible={true}
+                                    accessibilityLabel="touchable article share"
+                                    accessibilityTraits="button">
+                    <Text><FaIcon name="share-alt" size={iconBase.social.size} color={iconBase.social.default} />{I18n.t('share')}</Text>
+                </TouchableHighlight>
+                <TouchableHighlight onPress={this._onPressShareSource}
+                                    accessible={true}
+                                    accessibilityLabel="touchable article source"
+                                    accessibilityTraits="button">
+                    <Text><FaIcon name="link" size={iconBase.social.size} color={iconBase.social.default} />{I18n.t('source')}</Text>
+                </TouchableHighlight>
+                <TouchableHighlight onPress={this._onPressShareTag}
+                                    accessible={true}
+                                    accessibilityLabel="touchable article tag"
+                                    accessibilityTraits="button">
+                    <Text><FaIcon name="tag" size={iconBase.social.size} color={iconBase.social.default} />{I18n.t('tag')}</Text>
+                </TouchableHighlight>
+            </View>
           </View>
-          <View style={styles.articleListContainer}>
-              <Text style={styles.articleListTitle}>{this.props.title}</Text>
-          </View>
-          <View style={styles.articleListContainer}>
-              {this.props.image &&
-                <Image style={styles.articleListImage} source={{uri: this.props.image }}/>
-              }
-              <Text style={ styles.articleListDesc }>{this.props.description}</Text>
-          </View>
-          <View style={styles.articleFooterContainer}>
-              <TouchableHighlight onPress={this._onPressShareSocial}
-                                  accessible={true}
-                                  accessibilityLabel="touchable article share"
-                                  accessibilityTraits="button">
-                  <Text><FaIcon name="share-alt" size={iconBase.social.size} color={iconBase.social.default} />{I18n.t('share')}</Text>
-              </TouchableHighlight>
-              <TouchableHighlight onPress={this._onPressShareSource}
-                                  accessible={true}
-                                  accessibilityLabel="touchable article source"
-                                  accessibilityTraits="button">
-                  <Text><FaIcon name="link" size={iconBase.social.size} color={iconBase.social.default} />{I18n.t('source')}</Text>
-              </TouchableHighlight>
-              <TouchableHighlight onPress={this._onPressShareTag}
-                                  accessible={true}
-                                  accessibilityLabel="touchable article tag"
-                                  accessibilityTraits="button">
-                  <Text><FaIcon name="tag" size={iconBase.social.size} color={iconBase.social.default} />{I18n.t('tag')}</Text>
-              </TouchableHighlight>
-          </View>
-        </View>
-      </TouchableHighlight>
-    )
+        </TouchableHighlight>
+      );
+    }
   }
 }
 

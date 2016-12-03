@@ -4,7 +4,7 @@ export default env = {
       base: 'https://bryanyuan2.tk:8081/api/readability/'
     },
     bookmarks: {
-      defaultReuqest: 10,
+      defaultReuqest: 20,
       list: 'https://bryanyuan2.tk:8081/api/bookmarks/list/'
     }
   }
