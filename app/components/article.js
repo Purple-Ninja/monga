@@ -1,49 +1,77 @@
 import React, { Component } from 'react';
 import { Dimensions, StyleSheet, View, Text, ListView, Image, processColor, TouchableHighlight } from 'react-native';
 import Browser from 'react-native-browser';
-
-import Icon from 'react-native-vector-icons/FontAwesome';
-import I18n from './../r3/default';
-const styles = require('./../css/stylesheet');
 import _ from 'lodash';
+import FaIcon from 'react-native-vector-icons/FontAwesome';
+import I18n from './../locales/default';
 
-const DUMMY = {
-  title: '出師表',
-  desc: '臣亮言：先帝創業未半，而中道崩殂。今天下三分，益州疲弊，此誠危急存亡之秋也。然侍衛之臣，不懈於內；忠志之士，忘身於外者，蓋追先帝之殊遇，欲報之於陛下也。誠宜開張聖聽，以光先帝遺德，恢弘志士之氣',
-  img: 'https://facebook.github.io/react/img/logo_og.png',
-  icon: ''
-}
+const styles = require('./../resource/css/stylesheet');
+const env = require('./../configs/env');
+const base = require('./../configs/base');
 
-class ArticleItem extends Component {
+const readBaseAPI = env.default.api.readability.base;
+const iconBase = base.default.article.icon;
+const dummyBase = base.default.article.dummy;
+
+const browserConf = {
+        showUrlWhileLoading: false,
+        showActionButton: false,
+        disableContextualPopupMenu: true,
+      };
+
+class Article extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isArchived: false,
+      archivedColor: iconBase.archive.unSelectedColor
+    };
+  }
+
   static defaultProps = {
-      title: DUMMY.title,
-      description: DUMMY.desc,
-      image: DUMMY.img,
-      url: 'https://google.com/',
-      icon: 'https://cdn4.iconfinder.com/data/icons/new-google-logo-2015/400/new-google-favicon-128.png'
+      title: dummyBase.title,
+      description: dummyBase.desc,
+      image: dummyBase.img,
+      url: dummyBase.url,
+      icon: dummyBase.icon,
+      bookmarkID: 1111
   };
   static propTypes = {
       title: React.PropTypes.string.isRequired,
       description: React.PropTypes.string.isRequired,
       image: React.PropTypes.string,
       url: React.PropTypes.string.isRequired,
-      icon: React.PropTypes.string
+      icon: React.PropTypes.string,
+      bookmarkID: React.PropTypes.number
   };
 
   _onPressButton = (e) => {
-    Browser.open(this.props.url);
+    Browser.open(readBaseAPI + this.props.bookmarkID, browserConf);
   }
+
+  _onPressShareSource = (e) => {
+    Browser.open(this.props.url, browserConf);
+  }
+
 
   _onPressShareTag = (e) => {
   }
 
-  _onPressShareSource = (e) => {
-  }
-
-  _onPressShareAbstract = (e) => {
-  }
-
   _onPressShareSocial = (e) => {
+  }
+
+  _likeOnclick = (e) => {
+    if (this.state.isArchived) {
+      this.setState({
+        archivedColor: iconBase.archive.unSelectedColor,
+        isArchived: false
+      });  
+    } else {
+      this.setState({
+        archivedColor: iconBase.archive.selectedColor,
+        isArchived: true
+      }); 
+    } 
   }
 
   render() {
@@ -58,19 +86,21 @@ class ArticleItem extends Component {
                 <Image style={styles.articleListIcon} source={{uri: this.props.icon }}/>
                 <Text>YAHOO</Text>
               </View>
-              <Text><Icon name="bookmark" size={14} color="#900" />{I18n.t('like')}</Text>
+              <TouchableHighlight onPress={this._likeOnclick}>
+                <Text><FaIcon name="bookmark" size={iconBase.archive.size} color={this.state.archivedColor} />{I18n.t('like')}</Text>
+              </TouchableHighlight>
           </View>
           <View style={styles.articleListContainer}>
               <Text style={styles.articleListMetaTag}>X 小時前 | </Text>
               <Text style={styles.articleListMetaTag}>約 X 分鐘讀完 | </Text>
-              <Text style={styles.articleListMetaTag}>熱門度 1230</Text>
+              <Text style={styles.articleListMetaTag}>{I18n.t('popular')} 1230</Text>
           </View>
           <View style={styles.articleListContainer}>
               <Text style={styles.articleListTitle}>{this.props.title}</Text>
           </View>
           <View style={styles.articleListContainer}>
               {this.props.image &&
-              <Image style={styles.articleListImage} source={{uri: this.props.image }}/>
+                <Image style={styles.articleListImage} source={{uri: this.props.image }}/>
               }
               <Text style={ styles.articleListDesc }>{this.props.description}</Text>
           </View>
@@ -79,19 +109,19 @@ class ArticleItem extends Component {
                                   accessible={true}
                                   accessibilityLabel="touchable article share"
                                   accessibilityTraits="button">
-                  <Text><Icon name="share-alt" size={14} color="#900" />{I18n.t('share')}</Text>
+                  <Text><FaIcon name="share-alt" size={iconBase.social.size} color={iconBase.social.default} />{I18n.t('share')}</Text>
               </TouchableHighlight>
-              <TouchableHighlight onPress={this._onPressShareTag}
+              <TouchableHighlight onPress={this._onPressShareSource}
                                   accessible={true}
                                   accessibilityLabel="touchable article source"
                                   accessibilityTraits="button">
-                  <Text><Icon name="link" size={14} color="#900" />{I18n.t('source')}</Text>
+                  <Text><FaIcon name="link" size={iconBase.social.size} color={iconBase.social.default} />{I18n.t('source')}</Text>
               </TouchableHighlight>
               <TouchableHighlight onPress={this._onPressShareTag}
                                   accessible={true}
                                   accessibilityLabel="touchable article tag"
                                   accessibilityTraits="button">
-                  <Text><Icon name="tag" size={14} color="#900" />{I18n.t('tag')}</Text>
+                  <Text><FaIcon name="tag" size={iconBase.social.size} color={iconBase.social.default} />{I18n.t('tag')}</Text>
               </TouchableHighlight>
           </View>
         </View>
@@ -100,4 +130,4 @@ class ArticleItem extends Component {
   }
 }
 
-export default ArticleItem;
+export default Article;

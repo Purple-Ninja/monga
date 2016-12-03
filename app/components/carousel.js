@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import { Dimensions, StyleSheet, View, Text, ListView, Image } from 'react-native';
-
 import Carousel from 'react-native-looped-carousel';
-import ParallaxScroll from './parallaxScroll';
+import Bookmarks from './../pages/bookmarks';
 
 const { width, height } = Dimensions.get('window');
-const styles = require('./../css/stylesheet');
+const styles = require('./../resource/css/stylesheet');
 
 const STATIC_PATH = {
     COVER: {
-        ENGINEERING: require("./../image/cover/engineering.jpg"),
-        PRODUCT: require("./../image/cover/product.jpg"),
-        MARKETING: require("./../image/cover/marketing.jpg")
+        ENGINEERING: require("./../resource/image/cover/engineering.jpg"),
+        PRODUCT: require("./../resource/image/cover/product.jpg"),
+        MARKETING: require("./../resource/image/cover/marketing.jpg")
     },
     NAME: {
         ENGINEERING: 'Engineering',
@@ -41,25 +40,25 @@ class CarouselApp extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }} onLayout={this._onLayoutDidChange}>
+      <View style={styles.defaultFlex} onLayout={this._onLayoutDidChange}>
           <Carousel style={this.state.size}
                     autoplay={false}
                     pageInfo
                     onAnimateNextPage={(p) => console.log(p)}>
               <View style={this.state.size}>
-                  <ParallaxScroll name={STATIC_PATH.NAME.ENGINEERING}
+                  <Bookmarks name={STATIC_PATH.NAME.ENGINEERING}
                                   subtitle={STATIC_PATH.SUBTITLE.ENGINEERING}
                                   cover={STATIC_PATH.COVER.ENGINEERING}
                                   blur={STATIC_PATH.BLUR_RADIUS} />
               </View>
               <View style={this.state.size}>
-                  <ParallaxScroll name={STATIC_PATH.NAME.PRODUCT}
+                  <Bookmarks name={STATIC_PATH.NAME.PRODUCT}
                                   subtitle={STATIC_PATH.SUBTITLE.PRODUCT}
                                   cover={STATIC_PATH.COVER.PRODUCT}
                                   blur={STATIC_PATH.BLUR_RADIUS} />
               </View>
               <View style={this.state.size}>
-                  <ParallaxScroll name={STATIC_PATH.NAME.MARKETING}
+                  <Bookmarks name={STATIC_PATH.NAME.MARKETING}
                                   subtitle={STATIC_PATH.SUBTITLE.MARKETING}
                                   cover={STATIC_PATH.COVER.MARKETING}
                                   blur={STATIC_PATH.BLUR_RADIUS} />

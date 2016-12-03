@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Dimensions, StyleSheet, View, Text, ListView, Image } from 'react-native';
-
 import SettingsList from 'react-native-settings-list';
 
+import I18n from './../locales/default';
+const styles = require('./../resource/css/stylesheet');
 const { width, height } = Dimensions.get('window');
-const styles = require('./../css/stylesheet');
 
 class SettingApp extends Component {
   constructor(props) {
@@ -21,10 +21,10 @@ class SettingApp extends Component {
     this.setState({switchValue: value});
   }
 
-  render() {
+  render() { 
     return (
       <View style={{backgroundColor:'#EFEFF4',flex:1}}>
-        <View style={styles.statusBar}><Text style={styles.statusBarText}>Setting</Text></View>
+        <View style={styles.statusBar}><Text style={styles.statusBarText}>{I18n.t('setting')}</Text></View>
         <View style={{backgroundColor:'#EFEFF4',flex:1}}>
           <SettingsList borderColor='#c8c7cc' defaultItemSize={50}>
             <SettingsList.Header headerStyle={{marginTop:15}}/>
@@ -32,14 +32,10 @@ class SettingApp extends Component {
                                 switchState={this.state.switchValue}
                                 switchOnValueChange={this.onValueChange}
                                 hasNavArrow={false}
-                                title='Airplane Mode' />
-            <SettingsList.Header headerStyle={{marginTop:15}}/>
-            <SettingsList.Item  title='Notifications'
-                                onPress={() => Alert.alert('Route To Notifications Page')} />
-            <SettingsList.Item  title='Control Center'
-                                onPress={() => Alert.alert('Route To Control Center Page')} />
-            <SettingsList.Item  title='Do Not Disturb'
-                                onPress={() => Alert.alert('Route To Do Not Disturb Page')} />
+                                title={I18n.t('nightMode')} />
+            <SettingsList.Header headerStyle={{marginTop:10}}/>
+            <SettingsList.Item  title={I18n.t('notification')}
+                                onPress={() => console.log('Route To Notifications Page')} />
           </SettingsList>
         </View>
     </View>
