@@ -1,11 +1,15 @@
 export default env = {
   api: {
-    readability: {
-      base: 'https://bryanyuan2.tk:8081/api/readability/'
+  	server: {
+  		host: 'https://bryanyuan2.tk',
+  		port: '8081',
+  	},
+  	readability: {
+      base: '/api/readability/'
     },
     bookmarks: {
       defaultReuqest: 20,
-      list: 'https://bryanyuan2.tk:8081/api/bookmarks/list/'
+      list: '/api/bookmarks/list/'
     }
   }
 };

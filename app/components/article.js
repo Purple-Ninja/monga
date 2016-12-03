@@ -9,9 +9,11 @@ const styles = require('./../resource/css/stylesheet');
 const env = require('./../configs/env');
 const base = require('./../configs/base');
 
-const readBaseAPI = env.default.api.readability.base;
 const iconBase = base.default.article.icon;
 const dummyBase = base.default.article.dummy;
+
+const serverBase = env.default.api.server;
+const readPath = env.default.api.readability.base;
 
 const browserConf = {
         showUrlWhileLoading: false,
@@ -26,9 +28,8 @@ class Article extends Component {
       description: dummyBase.desc,
       image: dummyBase.img,
       url: dummyBase.url,
-      favicon: dummyBase.icon,
       bookmarkID: 1111,
-      host: 'default.com',
+      host: 'tw.yahoo.com',
       placeholder: false
   }
 
@@ -37,9 +38,8 @@ class Article extends Component {
       description: React.PropTypes.string.isRequired,
       image: React.PropTypes.string,
       url: React.PropTypes.string.isRequired,
-      favicon: React.PropTypes.string,
       bookmarkID: React.PropTypes.number,
-      host: React.PropTypes.string.isRequired
+      host: React.PropTypes.string
   }
 
   constructor(props) {
@@ -51,7 +51,7 @@ class Article extends Component {
   }
 
   _onPressButton = (e) => {
-    Browser.open(readBaseAPI + this.props.bookmarkID, browserConf);
+    Browser.open(serverBase.host + ':' + serverBase.port + readPath + this.props.bookmarkID, browserConf);
   }
 
   _onPressShareSource = (e) => {
@@ -103,7 +103,6 @@ class Article extends Component {
           <View style={ styles.articleListRow }>
             <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
                 <View style={{flex: 1, flexDirection: 'row'}}>
-                  <Image style={styles.articleListIcon} source={{uri: this.props.favicon }}/>
                   <Text>{this.props.host}</Text>
                 </View>
                 <TouchableHighlight onPress={this._likeOnclick}>

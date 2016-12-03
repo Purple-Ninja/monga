@@ -3,8 +3,8 @@ import { Dimensions, StyleSheet, View, Text, ListView, Image, processColor, Touc
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import BlurImage from 'react-native-blur-image'
 import Browser from 'react-native-browser';
-
 import I18n from './../locales/default';
+
 import Article from './../components/article';
 const styles = require('./../resource/css/stylesheet');
 const base = require('./../configs/base');
@@ -12,7 +12,9 @@ const env = require('./../configs/env');
 
 const stickyHeader = base.default.stickyHeader;
 const parallaxSroll = base.default.parallaxSroll;
-const bookmarksListAPI = env.default.api.bookmarks;
+
+const serverBase = env.default.api.server;
+const bookmarksBase = env.default.api.bookmarks;
 
 class ParallaxScroll extends Component {
   static defaultProps = {
@@ -39,7 +41,7 @@ class ParallaxScroll extends Component {
   }
 
   fetchData() {
-    fetch(bookmarksListAPI.list + bookmarksListAPI.defaultReuqest, {
+    fetch(serverBase.host + ':' + serverBase.port + bookmarksBase.list + bookmarksBase.defaultReuqest, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -48,7 +50,6 @@ class ParallaxScroll extends Component {
     })
     .catch((error) => console.warn("fetch error:", error))
     .then((response) => response.json()).then((responseData) => {
-        console.log("responseData type", typeof(responseData));
         this.updateDataSource(responseData);
     })
     .done();
@@ -76,9 +77,9 @@ class ParallaxScroll extends Component {
                   description={data._description}
                   image={data._image}
                   url={data.url}
-                  favicon={data._favicon}
+                  host={data.host}
                   bookmarkID={data.bookmark_id}
-                  host={data.host} />
+        />
       );
     }
   }
