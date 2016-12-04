@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { Dimensions, Image, ListView, StyleSheet, TabBarIOS, Text, View } from 'react-native';
-import CarouselApp from './component/carousel';
-import ArchiveApp from './component/archive';
-import SettingApp from './component/setting';
-import FeaturesApp from './component/features';
-
-import I18n from './r3/default';
+import NavigationBar from 'react-native-navigation-bar';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const styles = require('./css/stylesheet'); 
+import CarouselApp from './components/carousel';
+import ArchiveApp from './pages/archive';
+import SettingApp from './pages/setting';
+import FeaturesApp from './pages/features';
+import BlogApp from './pages/blog';
+
+import I18n from './locales/default';
+const styles = require('./resource/css/stylesheet'); 
 const { width, height } = Dimensions.get('window');
 
-import NavigationBar from 'react-native-navigation-bar';
- 
 class appContainer extends React.Component {
   state = {
     selectedTab: 'bookmarksTab',
@@ -21,7 +21,7 @@ class appContainer extends React.Component {
 
   render() {
     return (
-      <View style={{flex: 1 }}>
+      <View style={styles.defaultFlex}>
       <TabBarIOS  unselectedTintColor="#888888"
                   tintColor="#888888"
                   barTintColor="#FFFFFF">
@@ -36,7 +36,7 @@ class appContainer extends React.Component {
                             }} >
             <CarouselApp />
           </Icon.TabBarItem>
-          <Icon.TabBarItem  title="Features"
+          <Icon.TabBarItem  title={I18n.t('features')}
                             iconName="ios-heart-outline"
                             selectedIconName="ios-heart"
                             badge={this.state.notifCount > 0 ? this.state.notifCount : undefined}
@@ -49,29 +49,29 @@ class appContainer extends React.Component {
                             }}>
             <FeaturesApp />
           </Icon.TabBarItem>
-          <Icon.TabBarItem  title="Offline"
+          <Icon.TabBarItem  title={I18n.t('archive')}
                             iconName="ios-bookmark-outline"
                             selectedIconName="ios-bookmark"
-                            selected={this.state.selectedTab === 'offlineTab'}
+                            selected={this.state.selectedTab === 'archiveTab'}
                             onPress={() => {
                               this.setState({
-                                selectedTab: 'offlineTab',
+                                selectedTab: 'archiveTab',
                               });
                             }}>
             <ArchiveApp />
           </Icon.TabBarItem>
-          <Icon.TabBarItem  title="Blog"
+          <Icon.TabBarItem  title={I18n.t('blog')}
                             iconName="ios-at-outline"
                             selectedIconName="ios-at"
-                            selected={this.state.selectedTab === 'rssTab'}
+                            selected={this.state.selectedTab === 'blogTab'}
                             onPress={() => {
                               this.setState({
-                                selectedTab: 'rssTab',
+                                selectedTab: 'blogTab',
                               });
                             }}>
-            <View></View>
+            <BlogApp />
           </Icon.TabBarItem>
-          <Icon.TabBarItem  title="Setting"
+          <Icon.TabBarItem  title={I18n.t('setting')}
                             iconName="ios-settings-outline"
                             selectedIconName="ios-settings"
                             selected={this.state.selectedTab === 'settingTab'}

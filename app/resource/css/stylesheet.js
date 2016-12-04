@@ -2,22 +2,33 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 
 const PARALLAX = {
-      HEADER_HEIGHT: 350,
-      STICKY_HEADER: {
-          HEIGHT: 70
-      }
+    HEADER_HEIGHT: 350,
+    STICKY_HEADER: {
+        HEIGHT: 70
+    }
 };
 
 const styles = StyleSheet.create({
+    placeholderTitle: {
+      backgroundColor: '#DCDCDC',
+      marginTop: 4
+    },
+    placeholderText: {
+      backgroundColor: '#888888',
+      marginTop: 4
+    },
     // overall
+    defaultFlex: {
+      flex: 1
+    },
     container: {
       flex: 1,
       flexDirection: 'row'
     },
     statusBar: {
       borderBottomWidth: 1,
-      backgroundColor: '#f7f7f8',
-      borderColor: '#c8c7cc'
+      backgroundColor: '#F7F7F8',
+      borderColor: '#C8C7CC'
     },
     statusBarText: {
       alignSelf:'center',
@@ -39,14 +50,16 @@ const styles = StyleSheet.create({
       marginTop: 12
     },
     articleListRow: {
+        minHeight: 60,
         overflow: 'hidden',
         paddingHorizontal: 10,
         paddingTop: 10,
         paddingBottom: 10,
-        minHeight: 60,
         backgroundColor: '#FFFFFF',
         borderColor: '#CCCCCC',
         borderWidth: 1,
+        borderLeftWidth: 0,
+        borderRightWidth: 0,
         marginTop: 10,
         justifyContent: 'center'
     },
@@ -103,7 +116,7 @@ const styles = StyleSheet.create({
       justifyContent: 'flex-end'
     },
     stickySectionText: {
-      color: 'white',
+      color: '#FFFFFF',
       fontSize: 14,
       margin: 10
     },

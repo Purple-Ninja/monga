@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Dimensions, StyleSheet, View, Text, ListView, Image } from 'react-native';
+import SearchBar from 'react-native-search-bar';
 
-const styles = require('./../css/stylesheet');
-
-import ArticleItem from './articleItem';
+import I18n from './../locales/default';
+const styles = require('./../resource/css/stylesheet');
+import Article from './../components/article';
 
 class ArchiveApp extends Component {
   constructor(props) {
@@ -17,9 +18,10 @@ class ArchiveApp extends Component {
   render() {
     return (
           <View style={{flex: 1 }}>
-            <View style={styles.statusBar}><Text style={styles.statusBarText}>Offline</Text></View>
+            <View style={styles.statusBar}><Text style={styles.statusBarText}>{I18n.t('archive')}</Text></View>
+            <SearchBar placeholder={I18n.t('search')} textFieldBackgroundColor='#FFF' />
             <ListView dataSource={this.state.dataSource}
-                      renderRow={(data) => <ArticleItem />} />
+                      renderRow={(data) => <Article />} />
           </View>
     );
   }
